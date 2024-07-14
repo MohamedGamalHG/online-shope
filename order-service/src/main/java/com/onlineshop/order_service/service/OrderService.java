@@ -5,6 +5,7 @@ import com.onlineshop.order_service.entity.dto.OrderRequest;
 import com.onlineshop.order_service.entity.jpa.JpaOrder;
 import com.onlineshop.order_service.entity.jpa.JpaOrderLineItem;
 import com.onlineshop.order_service.mapping.OrderLineItemMap;
+import com.onlineshop.order_service.repository.OrderLineItemRepository;
 import com.onlineshop.order_service.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class OrderService {
 
     private final OrderLineItemMap orderMap;
     private final OrderRepository orderRepository;
+    private final OrderLineItemRepository orderLineItemRepository;
     public void placeOrder(OrderRequest orderRequest)
     {
         JpaOrder order = new JpaOrder();
@@ -29,6 +31,7 @@ public class OrderService {
                 .map(orderLineItem -> orderMap.convertTo(orderLineItem)).toList();
         order.setOrderLineItems(orderLineItems);
         orderRepository.save(order);
+
 
     }
 }

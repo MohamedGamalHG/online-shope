@@ -21,5 +21,8 @@ public class JpaOrderLineItem {
     private String skuCode;
     private BigDecimal price;
     private Integer quantity;
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private JpaOrder order;
 
 }

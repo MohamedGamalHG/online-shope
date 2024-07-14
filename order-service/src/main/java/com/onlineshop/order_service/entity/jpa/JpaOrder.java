@@ -6,10 +6,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,6 +20,6 @@ public class JpaOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String orderNumber;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<JpaOrderLineItem> orderLineItems;
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private List<JpaOrderLineItem> orderLineItems = new ArrayList<>();
 }
