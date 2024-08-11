@@ -21,5 +21,6 @@ public class JpaOrder {
     private Long id;
     private String orderNumber;
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private List<JpaOrderLineItem> orderLineItems = new ArrayList<>();
+//    @OneToMany(cascade = CascadeType.ALL)
+    private List<JpaOrderLineItem> orderLineItems;
 }

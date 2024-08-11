@@ -1,11 +1,11 @@
 package com.onlineshop.inventory_serivce.controller;
 
+import com.onlineshop.inventory_serivce.entity.jpa.dto.InventoryResponse;
 import com.onlineshop.inventory_serivce.service.InventoryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/inventory")
@@ -17,9 +17,9 @@ public class InventoryController {
     /*
      * is method take skuCode and verify this skuCode related to product in stock or not
      */
-    @GetMapping("/{sku-code}")
-
-    public boolean isInStock(@PathVariable("sku-code") String skuCode)
+//    @GetMapping("/{sku-code}")
+    @GetMapping
+    public List<InventoryResponse> isInStock(@RequestParam List<String> skuCode)
     {
         return inventoryService.isInStock(skuCode);
     }
