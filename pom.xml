@@ -26,7 +26,8 @@
 		<module>inventory-service</module>
 		<module>order-service</module>
         <module>discovery-server</module>
-    </modules>
+		<module>api-gateway</module>
+	</modules>
 	<scm>
 		<connection/>
 		<developerConnection/>
