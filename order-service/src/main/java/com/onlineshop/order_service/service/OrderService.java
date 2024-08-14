@@ -24,7 +24,7 @@ public class OrderService {
     private final OrderLineItemMap orderMap;
     private final OrderRepository orderRepository;
     private final OrderLineItemRepository orderLineItemRepository;
-    private final WebClient client;
+    private final WebClient.Builder client;
 
     public void placeOrder(OrderRequest orderRequest) {
         JpaOrder order = new JpaOrder();
@@ -37,8 +37,9 @@ public class OrderService {
         List<String> skuCodes = orderRequest.getOrderLineItems().stream()
                 .map(orderLineItem -> orderLineItem.getSkuCode()).toList();
 
-        InventoryResponse[] inventoryResponses = client.get()
-                .uri("http://localhost:8082/api/inventory",uriBuilder -> uriBuilder.queryParam("skuCode",skuCodes).build())
+        InventoryResponse[] inventoryResponses = client.build().get()
+//                .uri("http://localhost:8082/api/inventory",uriBuilder -> uriBuilder.queryParam("skuCode",skuCodes).build())
+                .uri("http://inventory-service/api/inventory",uriBuilder -> uriBuilder.queryParam("skuCode",skuCodes).build())
                 .retrieve()
                 .bodyToMono(InventoryResponse[].class)
                 .block();

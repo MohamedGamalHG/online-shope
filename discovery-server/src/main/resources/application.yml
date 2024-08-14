@@ -4,3 +4,15 @@ eureka:
   client:
     register-with-eureka: false
     fetch-register: false
+
+server:
+  port: 8761
+# register-with-eureka: false means that the service will not register itself with the Eureka server.
+#                        This means that other services will not be able to discover this service using Eureka.
+
+#fetch-register: false is related to the registration process. When fetch-register is true,
+#                the client will periodically fetch the registry from the Eureka server to check if there are any changes in the registered services.
+#                Disabling this feature means that the client will not periodically fetch the registry and will only rely on its local cache of registered services.
+
+#setting register-with-eureka:  false and fetch-register: false
+#         - allows you to control the behavior of your service with respect to Eureka registration and discovery.
