@@ -1,18 +1,10 @@
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost8761/eureka
+      defaultZone: http://localhost:8761/eureka
 spring:
   application:
     name: api-gateway
-logging:
-  level:
-    root: info
-  org:
-    springframework:
-      cloud:
-        gateway-route-RouteDefinitionLocator: info
-        gateway: trace
   cloud:
     gateway:
       routes:
@@ -20,4 +12,23 @@ logging:
           uri: lb://product-service
           predicates:
             - Path=/api/product
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/api/order
+        - id: inventory-service
+          uri: lb://inventory-service
+          predicates:
+            - Path=/api/inventory
+#logging:
+#  level:
+#    root: info
+#  org:
+#    springframework:
+#      cloud:
+#        gateway-route-RouteDefinitionLocator: info
+#        gateway: trace
+
+server:
+  port: 8080
 
